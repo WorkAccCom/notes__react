@@ -1,9 +1,9 @@
-# React TypeScript Starter Pack
+# Notes React application
 
-To use this template click `Use this template`
+[DEMO LINK](https://workacccom.github.io/notes_react/)
 
-### Available Scripts
+# Used technologies\
 
-`Deploy` - available to deploy your application to gh-pages
-
-`SCSS Preprocessor` - available to write your styles with modern style language
+• React: Hooks, Router\
+• Typescript\
+• Sass
