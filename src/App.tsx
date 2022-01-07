@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import './App.scss';
+import { notes as notesFromLocalStorage } from './localesrotage';
 
 import { Notes } from './components/Notes';
 
 export const App: React.FC = () => {
-  const defaultNotes = [
-    {
-      id: 0,
-      title: 'First note title',
-      text: 'This is a text content of the first default note',
-    },
-    {
-      id: 1,
-      title: 'Second note title',
-      text: 'This is a text content of the Second default note',
-    },
-  ];
-
-  useEffect(() => {
-
-  }, []);
-
   return (
-    <div className="app">
-      <h1 className="app__title">Notes</h1>
+    <div className="App">
       <Switch>
         <Route path="/" exact>
-          <Notes notes={defaultNotes} />
+          <h1 className="App__title">Notes</h1>
+          <Link to="/edit">
+            New note
+          </Link>
+          <Notes notes={notesFromLocalStorage} />
         </Route>
+        <Route path="/edit">
 
+        </Route>
         <p>error</p>
       </Switch>
     </div>

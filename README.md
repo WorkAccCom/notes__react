@@ -2,7 +2,7 @@
 
 [DEMO LINK](https://workacccom.github.io/notes_react/)
 
-# Used technologies\
+# Used technologies
 
 • React: Hooks, Router\
 • Typescript\
