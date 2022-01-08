@@ -1,4 +1,4 @@
-export const defaultNotes = [
+const defaultNotes = [
   {
     id: 0,
     title: 'First note title',
@@ -11,8 +11,6 @@ export const defaultNotes = [
   },
 ];
 
-localStorage.setItem('notes', JSON.stringify(defaultNotes));
-
-export const notes = JSON.parse(
-  localStorage.getItem('notes'),
-);
+export const setDefaultLocalStorage = () => {
+  localStorage.setItem('notes', JSON.stringify(defaultNotes));
+};

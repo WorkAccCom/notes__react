@@ -1,11 +1,26 @@
+// react library constituents
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
-import './App.scss';
-import { notes as notesFromLocalStorage } from './localesrotage';
 
+// react components
 import { Notes } from './components/Notes';
+import { Edit } from './components/Edit';
+
+// helping functions
+import { getLocalStorageData } from './data-processing/getLocalStrageData';
+import { setDefaultLocalStorage } from './data-processing/setDefaultLocalStorage';
+
+// other
+import './App.scss';
+import { Note } from './typedefs/Note';
 
 export const App: React.FC = () => {
+  let notesFromLocalStorage: Note[] | null = null;
+
+  useEffect(() => {
+    notesFromLocalStorage = getLocalStorageData();
+  });
+
   return (
     <div className="App">
       <Switch>
@@ -17,9 +32,9 @@ export const App: React.FC = () => {
           <Notes notes={notesFromLocalStorage} />
         </Route>
         <Route path="/edit">
-
+          <Edit />
         </Route>
-        <p>error</p>
+        <p>Error — page is not exist</p>
       </Switch>
     </div>
   );

@@ -3,12 +3,12 @@ import { Note } from '../../typedefs/Note';
 import './Notes.scss';
 
 interface Props {
-  notes: Note[],
+  notes: Note[] | null,
 }
 
 export const Notes: React.FC<Props> = ({ notes }) => (
   <ul className="Notes">
-    {notes.map((note) => (
+    {notes && notes.map((note) => (
       <li className="Notes__note" key={note.id}>
         <h3 className="Notes__note-title">
           {note.title}
@@ -16,6 +16,7 @@ export const Notes: React.FC<Props> = ({ notes }) => (
         <p className="Notes__note-text">
           {note.text}
         </p>
+
         <button
           type="button"
           onClick={() => {}}
