@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { updateLocalStorage } from '../../data-processing/updateLocalStorage';
 
 export const Edit: React.FC = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
-  const inputChangeHandle = (event: any) => {
-    switch (event.target.id) {
+  const inputChangeHandle = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => {
+    switch (event.target.name) {
       case 'title':
         setTitle(event.target.value);
         break;
@@ -15,28 +21,43 @@ export const Edit: React.FC = () => {
       default:
     }
 
-    // eslint-disable-next-line
-    console.log(event)
+    console.log(event);
+  };
+
+  const saveNote = (event: any) => {
+    event.preventDefault();
+    updateLocalStorage(title, text);
+    setRedirect(true);
   };
 
   return (
     <form
-      action="get"
-      onSubmit={() => {}}
+      action=""
+      onSubmit={saveNote}
     >
+      {redirect && <Redirect to="/" />}
+
       <input
         type="text"
         placeholder="Title"
         value={title}
         onChange={inputChangeHandle}
-        id="title"
+        name="title"
       />
       <textarea
         placeholder="Text"
         value={text}
         onChange={inputChangeHandle}
-        id="text"
+        name="text"
       />
+      <button
+        type="submit"
+        className="button"
+        onSubmit={saveNote}
+        disabled={!title || !text}
+      >
+        Save
+      </button>
     </form> 
   );
 };

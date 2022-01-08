@@ -15,11 +15,12 @@ import './App.scss';
 import { Note } from './typedefs/Note';
 
 export const App: React.FC = () => {
-  let notesFromLocalStorage: Note[] | null = null;
+  const [notesFromLocalStorage, setNotes] = useState<Note[] | null>(null);
+  // let notesFromLocalStorage: Note[] | null = null;
 
   useEffect(() => {
-    notesFromLocalStorage = getLocalStorageData();
-  });
+    setNotes(getLocalStorageData());
+  }, []);
 
   return (
     <div className="App">
@@ -31,9 +32,11 @@ export const App: React.FC = () => {
           </Link>
           <Notes notes={notesFromLocalStorage} />
         </Route>
+
         <Route path="/edit">
           <Edit />
         </Route>
+
         <p>Error — page is not exist</p>
       </Switch>
     </div>

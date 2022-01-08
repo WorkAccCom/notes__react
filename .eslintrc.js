@@ -7,9 +7,13 @@ module.exports = {
     // React
     'react/prop-types': 0,
     'react/self-closing-comp': 0,
-    // !!! manualy added
+    
+    // !!! manualy added 3 rules
     'react/display-name': 0,
-
+    'no-console': 0,
+    'padded-blocks': 0,
+    'react/jsx-indent': 0,
+    
     // JavaScript
     semi: 0,
     'no-proto': 0,
