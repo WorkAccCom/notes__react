@@ -8,7 +8,6 @@ import { Edit } from './components/Edit';
 
 // helping functions
 import { getNotesFromLocalStorage } from './data-processing/getNotesFromLocalStorage';
-import { setDefaultLocalStorage } from './data-processing/setDefaultLocalStorage';
 
 // other
 import './App.scss';
@@ -16,6 +15,7 @@ import { Note } from './typedefs/Note';
 
 export const App: React.FC = () => {
   const [notesFromLocalStorage, setNotes] = useState<Note[] | null>(null);
+  const [noteForEdit, setNoteForEdit] = useState<Note | null>(null);
 
   useEffect(() => {
     setNotes(getNotesFromLocalStorage());
@@ -32,11 +32,16 @@ export const App: React.FC = () => {
           <Notes
             notes={notesFromLocalStorage}
             listRerenderQuery={setNotes}
+            passNoteForEdit={setNoteForEdit}
           />
         </Route>
 
         <Route path="/edit">
-          <Edit listRerenderQuery={setNotes} />
+          <Edit
+            listRerenderQuery={setNotes}
+            chosenNoteForEdit={noteForEdit}
+            cleanUpNoteForEdit={setNoteForEdit}
+          />
         </Route>
 
         <p>Error — page is not exist</p>

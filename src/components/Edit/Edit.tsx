@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { addNoteToLocalStorage } from '../../data-processing/addNoteToLocalStorage';
+import { editNoteInLocalStorage } from '../../data-processing/editNoteInLocalStorage';
 import { getNotesFromLocalStorage } from '../../data-processing/getNotesFromLocalStorage';
 
 import { Note } from '../../typedefs/Note';
 
 interface Props {
-  listRerenderQuery: (par: Note[] | null) => void;
+  listRerenderQuery: (par: Note[] | null) => void,
+  chosenNoteForEdit: Note | null,
+  cleanUpNoteForEdit: (par: Note | null) => void,
 }
 
-export const Edit: React.FC<Props> = ({ listRerenderQuery }) => {
+export const Edit: React.FC<Props> = ({
+  listRerenderQuery,
+  chosenNoteForEdit,
+  cleanUpNoteForEdit,
+}) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (chosenNoteForEdit?.title) {
+      setTitle(chosenNoteForEdit.title);
+    }
+
+    if (chosenNoteForEdit?.text) {
+      setText(chosenNoteForEdit.text);
+    }
+  }, []);
 
   const inputChangeHandle = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -29,9 +46,22 @@ export const Edit: React.FC<Props> = ({ listRerenderQuery }) => {
     }
   };
 
-  const saveNote = (event: any) => {
+  const saveNote = (event: React.FormEvent) => {
     event.preventDefault();
-    addNoteToLocalStorage(title, text);
+
+    if (chosenNoteForEdit) {
+      editNoteInLocalStorage(
+        chosenNoteForEdit.id,
+        title,
+        text,
+      );
+      setTitle('');
+      setText('');
+      cleanUpNoteForEdit(null);
+    } else {
+      addNoteToLocalStorage(title, text);
+    }
+
     listRerenderQuery(getNotesFromLocalStorage());
     setRedirect(true);
   };
