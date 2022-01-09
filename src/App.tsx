@@ -16,7 +16,6 @@ import { Note } from './typedefs/Note';
 
 export const App: React.FC = () => {
   const [notesFromLocalStorage, setNotes] = useState<Note[] | null>(null);
-  // let notesFromLocalStorage: Note[] | null = null;
 
   useEffect(() => {
     setNotes(getLocalStorageData());
@@ -34,7 +33,7 @@ export const App: React.FC = () => {
         </Route>
 
         <Route path="/edit">
-          <Edit />
+          <Edit listRerenderQuery={setNotes} />
         </Route>
 
         <p>Error — page is not exist</p>
