@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { updateLocalStorage } from '../../data-processing/updateLocalStorage';
-import { getLocalStorageData } from '../../data-processing/getLocalStrageData';
+import { addNoteToLocalStorage } from '../../data-processing/addNoteToLocalStorage';
+import { getNotesFromLocalStorage } from '../../data-processing/getNotesFromLocalStorage';
 
 import { Note } from '../../typedefs/Note';
 
@@ -27,14 +27,12 @@ export const Edit: React.FC<Props> = ({ listRerenderQuery }) => {
         break;
       default:
     }
-
-    console.log(event);
   };
 
   const saveNote = (event: any) => {
     event.preventDefault();
-    updateLocalStorage(title, text);
-    listRerenderQuery(getLocalStorageData());
+    addNoteToLocalStorage(title, text);
+    listRerenderQuery(getNotesFromLocalStorage());
     setRedirect(true);
   };
 
@@ -62,7 +60,7 @@ export const Edit: React.FC<Props> = ({ listRerenderQuery }) => {
         type="submit"
         className="button"
         onSubmit={saveNote}
-        disabled={!title || !text}
+        disabled={!title}
       >
         Save
       </button>

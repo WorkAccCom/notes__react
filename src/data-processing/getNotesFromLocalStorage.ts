@@ -1,6 +1,6 @@
 import { Note } from '../typedefs/Note';
 
-export const getLocalStorageData = (): Note[] | null => {
+export const getNotesFromLocalStorage = (): Note[] | null => {
   const localStorageData = localStorage.getItem('notes');
 
   if (typeof localStorageData === 'string') {

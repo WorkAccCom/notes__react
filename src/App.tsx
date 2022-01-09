@@ -7,7 +7,7 @@ import { Notes } from './components/Notes';
 import { Edit } from './components/Edit';
 
 // helping functions
-import { getLocalStorageData } from './data-processing/getLocalStrageData';
+import { getNotesFromLocalStorage } from './data-processing/getNotesFromLocalStorage';
 import { setDefaultLocalStorage } from './data-processing/setDefaultLocalStorage';
 
 // other
@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   const [notesFromLocalStorage, setNotes] = useState<Note[] | null>(null);
 
   useEffect(() => {
-    setNotes(getLocalStorageData());
+    setNotes(getNotesFromLocalStorage());
   }, []);
 
   return (
@@ -29,7 +29,10 @@ export const App: React.FC = () => {
           <Link to="/edit">
             New note
           </Link>
-          <Notes notes={notesFromLocalStorage} />
+          <Notes
+            notes={notesFromLocalStorage}
+            listRerenderQuery={setNotes}
+          />
         </Route>
 
         <Route path="/edit">
