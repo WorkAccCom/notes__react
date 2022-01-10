@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import ReactModal from 'react-modal';
 
 import { addNoteToLocalStorage } from '../../data-processing/addNoteToLocalStorage';
 import { editNoteInLocalStorage } from '../../data-processing/editNoteInLocalStorage';

@@ -1,6 +1,7 @@
 // react library constituents
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
+import ReactModal from 'react-modal';
 
 // react components
 import { Notes } from './components/Notes';
