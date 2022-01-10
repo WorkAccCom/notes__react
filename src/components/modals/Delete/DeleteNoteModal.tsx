@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactModal from 'react-modal';
+import { useHistory } from 'react-router-dom';
 
 import { deleteNote } from '../../../data-processing/deleteNote';
 
@@ -18,6 +19,18 @@ export const DeleteNoteModal: React.FC<Props> = ({
   noteForDeleteId,
   listRerenderQuery,
 }) => {
+  const history = useHistory();
+
+  const handleClickOnYesButton = () => {
+    deleteNote(
+      noteForDeleteId,
+      changeModalRenderStatus,
+      listRerenderQuery,
+    );
+
+    history.push('/');
+  };
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -30,11 +43,7 @@ export const DeleteNoteModal: React.FC<Props> = ({
       <h2>Are you sure want to delete this note?</h2>
       <button
         type="button"
-        onClick={() => deleteNote(
-          noteForDeleteId,
-          changeModalRenderStatus,
-          listRerenderQuery,
-        )}
+        onClick={handleClickOnYesButton}
       >
         Yes
       </button>

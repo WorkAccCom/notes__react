@@ -8,6 +8,7 @@ import { editNoteInLocalStorage } from '../../data-processing/editNoteInLocalSto
 import { getNotesFromLocalStorage } from '../../data-processing/getNotesFromLocalStorage';
 
 import { Note } from '../../typedefs/Note';
+import { DeleteButton } from '../buttons/Delete';
 
 interface Props {
   listRerenderQuery: (par: Note[] | null) => void,
@@ -96,6 +97,11 @@ export const Edit: React.FC<Props> = ({
       >
         Save
       </button>
+
+      <DeleteButton
+        id={chosenNoteForEdit?.id || null}
+        listRerenderQuery={listRerenderQuery}
+      />
     </form> 
   );
 };

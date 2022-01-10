@@ -3,7 +3,7 @@ import { DeleteNoteModal } from '../../modals/Delete';
 import { Note } from '../../../typedefs/Note';
 
 interface Props {
-  id: number,
+  id: number | null,
   listRerenderQuery: (par: Note[] | null) => void,
 }
 
@@ -11,14 +11,12 @@ export const DeleteButton: React.FC<Props> = ({
   id,
   listRerenderQuery,
 }) => {
-
   const [deleteNoteModalRendered, setDeleteNoteModalRendered] = useState(false);
   const [noteForDeleteId, setNoteForDeleteId] = useState(-1);
 
-  const askForNoteDelete = (noteId: number) => {
-    setDeleteNoteModalRendered(true);
-
-    if (noteForDeleteId) {
+  const askForNoteDelete = (noteId: number | null) => {
+    if (noteId || noteId === 0) {
+      setDeleteNoteModalRendered(true);
       setNoteForDeleteId(noteId);
     }
   };
