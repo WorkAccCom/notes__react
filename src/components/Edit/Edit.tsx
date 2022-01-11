@@ -23,23 +23,34 @@ export const Edit: React.FC<Props> = ({
   chosenNoteForEdit,
   cleanUpNoteForEdit,
 }) => {
+  const [initialNoteState, setInitialNoteState] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [
     onSaveModalRendered,
     setOnSaveModalRendered,
   ] = useState(false);
+  const [
+    onCancelModalRendered,
+    setOnCancelModalRendered,
+  ] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
+    let initialNote = '';
+
     if (chosenNoteForEdit?.title) {
       setTitle(chosenNoteForEdit.title);
+      initialNote += chosenNoteForEdit.title;
     }
 
     if (chosenNoteForEdit?.text) {
       setText(chosenNoteForEdit.text);
+      initialNote += chosenNoteForEdit.text;
     }
+
+    setInitialNoteState(initialNote);
   }, []);
 
   const inputChangeHandle = (
@@ -67,14 +78,27 @@ export const Edit: React.FC<Props> = ({
         title,
         text,
       );
-      setTitle('');
-      setText('');
+
       cleanUpNoteForEdit(null);
     } else {
       addNoteToLocalStorage(title, text);
     }
 
     listRerenderQuery(getNotesFromLocalStorage());
+    history.push('/');
+  };
+
+  const handleClickOnCancelButton = () => {
+    if (title + text === initialNoteState) {
+      cleanUpNoteForEdit(null);
+      history.push('/');
+    }
+
+    setOnCancelModalRendered(true);
+  };
+
+  const cancelEditing = () => {
+    cleanUpNoteForEdit(null);
     history.push('/');
   };
 
@@ -98,7 +122,7 @@ export const Edit: React.FC<Props> = ({
         name="name"
         className="button"
         onClick={handleClickOnSaveButton}
-        disabled={!title}
+        disabled={!title || !(initialNoteState !== title + text)}
       >
         Save
       </button>
@@ -109,10 +133,27 @@ export const Edit: React.FC<Props> = ({
         functionOnConfirmation={saveNote}
       />
 
-      <DeleteButton
-        id={chosenNoteForEdit?.id || null}
-        listRerenderQuery={listRerenderQuery}
+      <button
+        type="button"
+        name="name"
+        className="button"
+        onClick={handleClickOnCancelButton}
+      >
+        Cancel
+      </button>
+      <ConfirmationModal
+        isOpen={onCancelModalRendered}
+        changeModalRenderStatus={setOnCancelModalRendered}
+        buttonName="cancel"
+        functionOnConfirmation={cancelEditing}
       />
+
+      {chosenNoteForEdit && (
+        <DeleteButton
+          id={chosenNoteForEdit?.id || null}
+          listRerenderQuery={listRerenderQuery}
+        />
+      )}
     </div> 
   );
 };
