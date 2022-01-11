@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { DeleteNoteModal } from '../../modals/Delete';
+import { ConfirmationModal } from '../../modals/Confirmation';
+import { deleteNote } from '../../../data-processing/deleteNote';
 import { Note } from '../../../typedefs/Note';
 
 interface Props {
@@ -11,12 +12,15 @@ export const DeleteButton: React.FC<Props> = ({
   id,
   listRerenderQuery,
 }) => {
-  const [deleteNoteModalRendered, setDeleteNoteModalRendered] = useState(false);
+  const [
+    ConfirmationModalRendered,
+    setConfirmationModalRendered,
+  ] = useState(false);
   const [noteForDeleteId, setNoteForDeleteId] = useState(-1);
 
   const askForNoteDelete = (noteId: number | null) => {
     if (noteId || noteId === 0) {
-      setDeleteNoteModalRendered(true);
+      setConfirmationModalRendered(true);
       setNoteForDeleteId(noteId);
     }
   };
@@ -25,6 +29,7 @@ export const DeleteButton: React.FC<Props> = ({
     <>
       <button
         type="button"
+        name="delete"
         onClick={() => {
           askForNoteDelete(id);
         }}
@@ -32,11 +37,13 @@ export const DeleteButton: React.FC<Props> = ({
       >
         Delete
       </button>
-      <DeleteNoteModal
-        isOpen={deleteNoteModalRendered}
-        changeModalRenderStatus={setDeleteNoteModalRendered}
+      <ConfirmationModal
+        isOpen={ConfirmationModalRendered}
+        changeModalRenderStatus={setConfirmationModalRendered}
         noteForDeleteId={noteForDeleteId}
         listRerenderQuery={listRerenderQuery}
+        buttonName="delete"
+        functionOnConfirmation={deleteNote}
       />
     </>
   );

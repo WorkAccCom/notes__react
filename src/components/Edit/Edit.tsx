@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import {
+  Redirect, Route, Switch, useHistory,
+} from 'react-router-dom';
 
-import { DeleteNoteModal } from '../modals/Delete';
+import { ConfirmationModal } from '../modals/Confirmation';
 
 import { addNoteToLocalStorage } from '../../data-processing/addNoteToLocalStorage';
 import { editNoteInLocalStorage } from '../../data-processing/editNoteInLocalStorage';
@@ -23,7 +25,12 @@ export const Edit: React.FC<Props> = ({
 }) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [redirect, setRedirect] = useState(false);
+  const [
+    onSaveModalRendered,
+    setOnSaveModalRendered,
+  ] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     if (chosenNoteForEdit?.title) {
@@ -49,9 +56,11 @@ export const Edit: React.FC<Props> = ({
     }
   };
 
-  const saveNote = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleClickOnSaveButton = () => {
+    setOnSaveModalRendered(true);
+  };
 
+  const saveNote = () => {
     if (chosenNoteForEdit) {
       editNoteInLocalStorage(
         chosenNoteForEdit.id,
@@ -66,16 +75,11 @@ export const Edit: React.FC<Props> = ({
     }
 
     listRerenderQuery(getNotesFromLocalStorage());
-    setRedirect(true);
+    history.push('/');
   };
 
   return (
-    <form
-      action=""
-      onSubmit={saveNote}
-    >
-      {redirect && <Redirect to="/" />}
-
+    <div className="Edit">
       <input
         type="text"
         placeholder="Title"
@@ -90,18 +94,25 @@ export const Edit: React.FC<Props> = ({
         name="text"
       />
       <button
-        type="submit"
+        type="button"
+        name="name"
         className="button"
-        onSubmit={saveNote}
+        onClick={handleClickOnSaveButton}
         disabled={!title}
       >
         Save
       </button>
+      <ConfirmationModal
+        isOpen={onSaveModalRendered}
+        changeModalRenderStatus={setOnSaveModalRendered}
+        buttonName="save"
+        functionOnConfirmation={saveNote}
+      />
 
       <DeleteButton
         id={chosenNoteForEdit?.id || null}
         listRerenderQuery={listRerenderQuery}
       />
-    </form> 
+    </div> 
   );
 };
