@@ -26,14 +26,8 @@ export const Edit: React.FC<Props> = ({
   const [initialNoteState, setInitialNoteState] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [
-    onSaveModalRendered,
-    setOnSaveModalRendered,
-  ] = useState(false);
-  const [
-    onCancelModalRendered,
-    setOnCancelModalRendered,
-  ] = useState(false);
+  const [onSaveModalRendered, setOnSaveModalRendered] = useState(false);
+  const [onCancelModalRendered, setOnCancelModalRendered] = useState(false);
 
   const history = useHistory();
 
@@ -51,6 +45,8 @@ export const Edit: React.FC<Props> = ({
     }
 
     setInitialNoteState(initialNote);
+
+    console.log();
   }, []);
 
   const inputChangeHandle = (
@@ -150,8 +146,9 @@ export const Edit: React.FC<Props> = ({
 
       {chosenNoteForEdit && (
         <DeleteButton
-          id={chosenNoteForEdit?.id || null}
+          id={chosenNoteForEdit.id}
           listRerenderQuery={listRerenderQuery}
+          cleanUpNoteForEdit={cleanUpNoteForEdit}
         />
       )}
     </div> 

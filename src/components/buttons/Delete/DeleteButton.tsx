@@ -6,22 +6,21 @@ import { Note } from '../../../typedefs/Note';
 interface Props {
   id: number | null,
   listRerenderQuery: (par: Note[] | null) => void,
+  cleanUpNoteForEdit?: (par: Note | null) => void,
 }
 
 export const DeleteButton: React.FC<Props> = ({
   id,
   listRerenderQuery,
+  cleanUpNoteForEdit,
 }) => {
-  const [
-    ConfirmationModalRendered,
-    setConfirmationModalRendered,
-  ] = useState(false);
+  const [ConfirmationModalRendered, setConfirmationModalRendered] = useState(false);
   const [noteForDeleteId, setNoteForDeleteId] = useState(-1);
 
   const askForNoteDelete = (noteId: number | null) => {
     if (noteId || noteId === 0) {
-      setConfirmationModalRendered(true);
       setNoteForDeleteId(noteId);
+      setConfirmationModalRendered(true);
     }
   };
 
@@ -40,10 +39,11 @@ export const DeleteButton: React.FC<Props> = ({
       <ConfirmationModal
         isOpen={ConfirmationModalRendered}
         changeModalRenderStatus={setConfirmationModalRendered}
-        noteForDeleteId={noteForDeleteId}
-        listRerenderQuery={listRerenderQuery}
         buttonName="delete"
         functionOnConfirmation={deleteNote}
+        noteForDeleteId={noteForDeleteId}
+        listRerenderQuery={listRerenderQuery}
+        cleanUpNoteForEdit={cleanUpNoteForEdit}
       />
     </>
   );

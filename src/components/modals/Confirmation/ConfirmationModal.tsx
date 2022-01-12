@@ -2,41 +2,46 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
-import { deleteNote } from '../../../data-processing/deleteNote';
-
 import { Note } from '../../../typedefs/Note';
 
 interface Props {
   isOpen: boolean,
   changeModalRenderStatus: (par: boolean) => void,
+  buttonName: string,
+  functionOnConfirmation: (par?: any, par2?: any, par3?: any, par4?: any) => void,
   noteForDeleteId?: number,
   listRerenderQuery?: (par: Note[] | null) => void,
-  buttonName: string,
-  functionOnConfirmation: (par?: any, par2?: any, par3?: any) => void,
+  cleanUpNoteForEdit?: (par: Note | null) => void,
 }
 
 export const ConfirmationModal: React.FC<Props> = ({
   isOpen,
   changeModalRenderStatus,
-  noteForDeleteId = -1,
-  listRerenderQuery,
   buttonName,
   functionOnConfirmation,
+  noteForDeleteId = -1,
+  listRerenderQuery,
+  cleanUpNoteForEdit,
 }) => {
   const history = useHistory();
 
   const handleClickOnYesButton = () => {
     switch (buttonName) {
       case 'delete': {
-        deleteNote(
+        functionOnConfirmation(
           noteForDeleteId,
           changeModalRenderStatus,
           listRerenderQuery,
+          cleanUpNoteForEdit,
         );
+
+        history.push('/');
+
         break;
       }
 
-      case 'save': {
+      case 'save':
+      case 'cancel': {
         if (functionOnConfirmation) {
           functionOnConfirmation();
         }
@@ -47,8 +52,6 @@ export const ConfirmationModal: React.FC<Props> = ({
       default:
         break;
     }
-
-    history.push('/');
   };
 
   const titleSelect = (name: string): string => {
