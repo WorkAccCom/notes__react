@@ -18,8 +18,11 @@ export const deleteNote: DeleteNote = (
   deleteNoteFromLocalStorage(noteForDeleteId);
   setConfirmationModalRendered(false);
 
-  if (listRerenderQuery && cleanUpNoteForEdit) {
+  if (listRerenderQuery) {
     listRerenderQuery(getNotesFromLocalStorage());
+  }
+
+  if (cleanUpNoteForEdit) {
     cleanUpNoteForEdit(null);
   }
 };
