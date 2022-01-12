@@ -1,15 +1,11 @@
-// react library constituents
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 
-// react components
 import { Notes } from './components/Notes';
 import { Edit } from './components/Edit';
 
-// helping functions
 import { getNotesFromLocalStorage } from './data-processing/getNotesFromLocalStorage';
 
-// other
 import './App.scss';
 import { Note } from './typedefs/Note';
 

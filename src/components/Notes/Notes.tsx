@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { DeleteButton } from '../buttons/Delete';
 

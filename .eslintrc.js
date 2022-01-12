@@ -7,13 +7,7 @@ module.exports = {
     // React
     'react/prop-types': 0,
     'react/self-closing-comp': 0,
-    
-    // !!! manualy added 3 rules
-    'react/display-name': 0,
-    'no-console': 0,
-    'padded-blocks': 0,
-    'react/jsx-indent': 0,
-    
+
     // JavaScript
     semi: 0,
     'no-proto': 0,
@@ -21,10 +15,7 @@ module.exports = {
     'no-trailing-spaces': 0,
 
     // TypeScript
-    // '@typescript-eslint/no-unused-vars': ['error'],
-    // !!! manualy added
-    
-    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/ban-types': 0,

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Redirect, Route, Switch, useHistory,
-} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { ConfirmationModal } from '../modals/Confirmation';
 
@@ -45,8 +43,6 @@ export const Edit: React.FC<Props> = ({
     }
 
     setInitialNoteState(initialNote);
-
-    console.log();
   }, []);
 
   const inputChangeHandle = (
