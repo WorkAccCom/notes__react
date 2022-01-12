@@ -29,7 +29,7 @@ export const Notes: React.FC<Props> = ({
     <ul className="Notes">
       {notes && notes.map((note) => (
         <li className="Notes__note" key={note.id}>
-          
+
           <h3 className="Notes__note-title">
             {note.title}
           </h3>

@@ -147,6 +147,6 @@ export const Edit: React.FC<Props> = ({
           cleanUpNoteForEdit={cleanUpNoteForEdit}
         />
       )}
-    </div> 
+    </div>
   );
 };

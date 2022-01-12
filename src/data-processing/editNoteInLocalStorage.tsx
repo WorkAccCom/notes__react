@@ -14,11 +14,11 @@ export const editNoteInLocalStorage = (
       title,
       text,
     };
-  
+
     const targetNoteIndex = notes.findIndex(
       ({ id }) => id === targetNoteId,
     );
-  
+
     const editedNotes = [...notes];
 
     editedNotes.splice(
