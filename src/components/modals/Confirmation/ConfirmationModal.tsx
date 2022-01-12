@@ -10,7 +10,7 @@ interface Props {
   buttonName: string,
   functionOnConfirmation: (par?: any, par2?: any, par3?: any, par4?: any) => void,
   noteForDeleteId?: number,
-  listRerenderQuery?: (par: Note[] | null) => void,
+  listReRenderQuery?: (par: Note[] | null) => void,
   cleanUpNoteForEdit?: (par: Note | null) => void,
 }
 
@@ -20,7 +20,7 @@ export const ConfirmationModal: React.FC<Props> = ({
   buttonName,
   functionOnConfirmation,
   noteForDeleteId = -1,
-  listRerenderQuery,
+  listReRenderQuery,
   cleanUpNoteForEdit,
 }) => {
   const history = useHistory();
@@ -31,7 +31,7 @@ export const ConfirmationModal: React.FC<Props> = ({
         functionOnConfirmation(
           noteForDeleteId,
           changeModalRenderStatus,
-          listRerenderQuery,
+          listReRenderQuery,
           cleanUpNoteForEdit,
         );
 

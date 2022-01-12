@@ -5,21 +5,21 @@ import { Note } from '../typedefs/Note';
 type DeleteNote = (
   id: number,
   setConfirmationModalRendered: (par: boolean) => void,
-  listRerenderQuery?: (par: Note[] | null) => void,
+  listReRenderQuery?: (par: Note[] | null) => void,
   cleanUpNoteForEdit?: (par: Note | null) => void,
 ) => void;
 
 export const deleteNote: DeleteNote = (
   noteForDeleteId,
   setConfirmationModalRendered,
-  listRerenderQuery,
+  listReRenderQuery,
   cleanUpNoteForEdit,
 ) => {
   deleteNoteFromLocalStorage(noteForDeleteId);
   setConfirmationModalRendered(false);
 
-  if (listRerenderQuery) {
-    listRerenderQuery(getNotesFromLocalStorage());
+  if (listReRenderQuery) {
+    listReRenderQuery(getNotesFromLocalStorage());
   }
 
   if (cleanUpNoteForEdit) {

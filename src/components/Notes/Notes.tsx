@@ -9,13 +9,13 @@ import './Notes.scss';
 
 interface Props {
   notes: Note[] | null,
-  listRerenderQuery: (par: Note[] | null) => void,
+  listReRenderQuery: (par: Note[] | null) => void,
   passNoteForEdit: (par: Note | null) => void,
 }
 
 export const Notes: React.FC<Props> = ({
   notes,
-  listRerenderQuery,
+  listReRenderQuery,
   passNoteForEdit,
 }) => {
   const history = useHistory();
@@ -49,7 +49,7 @@ export const Notes: React.FC<Props> = ({
 
           <DeleteButton
             id={note.id}
-            listRerenderQuery={listRerenderQuery}
+            listReRenderQuery={listReRenderQuery}
           />
         </li>
       ))}

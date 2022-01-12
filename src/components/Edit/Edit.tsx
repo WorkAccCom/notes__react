@@ -11,13 +11,13 @@ import { Note } from '../../typedefs/Note';
 import { DeleteButton } from '../buttons/Delete';
 
 interface Props {
-  listRerenderQuery: (par: Note[] | null) => void,
+  listReRenderQuery: (par: Note[] | null) => void,
   chosenNoteForEdit: Note | null,
   cleanUpNoteForEdit: (par: Note | null) => void,
 }
 
 export const Edit: React.FC<Props> = ({
-  listRerenderQuery,
+  listReRenderQuery,
   chosenNoteForEdit,
   cleanUpNoteForEdit,
 }) => {
@@ -76,7 +76,7 @@ export const Edit: React.FC<Props> = ({
       addNoteToLocalStorage(title, text);
     }
 
-    listRerenderQuery(getNotesFromLocalStorage());
+    listReRenderQuery(getNotesFromLocalStorage());
     history.push('/');
   };
 
@@ -143,7 +143,7 @@ export const Edit: React.FC<Props> = ({
       {chosenNoteForEdit && (
         <DeleteButton
           id={chosenNoteForEdit.id}
-          listRerenderQuery={listRerenderQuery}
+          listReRenderQuery={listReRenderQuery}
           cleanUpNoteForEdit={cleanUpNoteForEdit}
         />
       )}
