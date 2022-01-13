@@ -4,6 +4,12 @@
 
 # Used technologies
 
+• HTML5\
+• JavaScript\
 • React: Hooks, Router\
 • Typescript\
-• Sass
+• ClassNames\
+• ReactModal\
+• Boolma
+
+
