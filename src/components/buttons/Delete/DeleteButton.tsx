@@ -39,7 +39,6 @@ export const DeleteButton: React.FC<Props> = ({
           askForNoteDelete(id);
         }}
         className={classNames(
-          'Notes__note-delete',
           'button',
           'is-danger',
           { 'is-light': history.location.pathname !== '/edit' },

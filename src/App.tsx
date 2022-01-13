@@ -10,7 +10,6 @@ import { getNotesFromLocalStorage } from './data-processing/getNotesFromLocalSto
 
 import { Note } from './typedefs/Note';
 
-import './App.scss';
 import 'bulma/css/bulma.min.css';
 
 export const App: React.FC = () => {
@@ -28,13 +27,12 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <Switch>
         <Route path="/" exact>
           <div className="level box section">
             <h1
               className={classNames(
-                'App__title',
                 'title',
                 'is-1',
                 'level-item',
@@ -73,6 +71,6 @@ export const App: React.FC = () => {
 
         <p>Error — page is not exist</p>
       </Switch>
-    </div>
+    </>
   );
 };

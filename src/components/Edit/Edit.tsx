@@ -97,7 +97,7 @@ export const Edit: React.FC<Props> = ({
   };
 
   return (
-    <div className="Edit box section">
+    <div className="box section">
       <div className="field">
         <input
           type="text"
@@ -119,7 +119,7 @@ export const Edit: React.FC<Props> = ({
           rows={8}
         />
       </div>
-      <div className="Edit__buttons buttons">
+      <div className="buttons">
         <button
           type="button"
           name="name"

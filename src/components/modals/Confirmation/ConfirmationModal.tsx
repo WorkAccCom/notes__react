@@ -86,7 +86,7 @@ export const ConfirmationModal: React.FC<Props> = ({
           top: '100px',
           left: '380px',
           right: '380px',
-          bottom: '550px',
+          bottom: '450px',
           border: '2px solid #ccc',
           padding: '30px',
         },
