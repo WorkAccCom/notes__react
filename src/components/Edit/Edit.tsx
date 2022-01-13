@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 import { ConfirmationModal } from '../modals/Confirmation';
 
 import { addNoteToLocalStorage } from '../../data-processing/addNoteToLocalStorage';
@@ -95,58 +97,70 @@ export const Edit: React.FC<Props> = ({
   };
 
   return (
-    <div className="Edit">
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={inputChangeHandle}
-        name="title"
-      />
-      <textarea
-        placeholder="Text"
-        value={text}
-        onChange={inputChangeHandle}
-        name="text"
-      />
-      <button
-        type="button"
-        name="name"
-        className="button"
-        onClick={handleClickOnSaveButton}
-        disabled={!title || !(initialNoteState !== title + text)}
-      >
-        Save
-      </button>
-      <ConfirmationModal
-        isOpen={onSaveModalRendered}
-        changeModalRenderStatus={setOnSaveModalRendered}
-        buttonName="save"
-        functionOnConfirmation={saveNote}
-      />
-
-      <button
-        type="button"
-        name="name"
-        className="button"
-        onClick={handleClickOnCancelButton}
-      >
-        Cancel
-      </button>
-      <ConfirmationModal
-        isOpen={onCancelModalRendered}
-        changeModalRenderStatus={setOnCancelModalRendered}
-        buttonName="cancel"
-        functionOnConfirmation={cancelEditing}
-      />
-
-      {chosenNoteForEdit && (
-        <DeleteButton
-          id={chosenNoteForEdit.id}
-          listReRenderQuery={listReRenderQuery}
-          cleanUpNoteForEdit={cleanUpNoteForEdit}
+    <div className="Edit box section">
+      <div className="field">
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={inputChangeHandle}
+          name="title"
+          className="input is-medium"
         />
-      )}
+      </div>
+      <div className="field">
+        <textarea
+          placeholder="Text"
+          value={text}
+          onChange={inputChangeHandle}
+          name="text"
+          className="textarea block is-medium"
+          disabled={!title}
+          rows={8}
+        />
+      </div>
+      <div className="Edit__buttons buttons">
+        <button
+          type="button"
+          name="name"
+          className="button is-success is-medium"
+          onClick={handleClickOnSaveButton}
+          disabled={!title || !(initialNoteState !== title + text)}
+        >
+          Save
+        </button>
+        <ConfirmationModal
+          isOpen={onSaveModalRendered}
+          changeModalRenderStatus={setOnSaveModalRendered}
+          buttonName="save"
+          functionOnConfirmation={saveNote}
+        />
+        <button
+          type="button"
+          name="name"
+          className={classNames(
+            'button',
+            'is-warning',
+            'is-medium',
+          )}
+          onClick={handleClickOnCancelButton}
+        >
+          Cancel
+        </button>
+        <ConfirmationModal
+          isOpen={onCancelModalRendered}
+          changeModalRenderStatus={setOnCancelModalRendered}
+          buttonName="cancel"
+          functionOnConfirmation={cancelEditing}
+        />
+        {chosenNoteForEdit && (
+          <DeleteButton
+            id={chosenNoteForEdit.id}
+            listReRenderQuery={listReRenderQuery}
+            cleanUpNoteForEdit={cleanUpNoteForEdit}
+          />
+        )}
+      </div>
     </div>
   );
 };

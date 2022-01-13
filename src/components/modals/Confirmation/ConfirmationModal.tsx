@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
@@ -80,20 +81,47 @@ export const ConfirmationModal: React.FC<Props> = ({
       onRequestClose={() => {
         changeModalRenderStatus(false);
       }}
+      style={{
+        content: {
+          top: '100px',
+          left: '380px',
+          right: '380px',
+          bottom: '550px',
+          border: '2px solid #ccc',
+          padding: '30px',
+        },
+      }}
     >
-      <h2>{titleSelect(buttonName)}</h2>
-      <button
-        type="button"
-        onClick={handleClickOnYesButton}
+      <h2
+        className={classNames(
+          'title',
+          'is-4',
+        )}
       >
-        Yes
-      </button>
-      <button
-        type="button"
-        onClick={() => changeModalRenderStatus(false)}
-      >
-        No
-      </button>
+        {titleSelect(buttonName)}
+      </h2>
+      <div className="buttons">
+        <button
+          type="button"
+          onClick={handleClickOnYesButton}
+          className={classNames(
+            'button',
+            'is-danger',
+          )}
+        >
+          Yes
+        </button>
+        <button
+          type="button"
+          onClick={() => changeModalRenderStatus(false)}
+          className={classNames(
+            'button',
+            'is-success',
+          )}
+        >
+          No
+        </button>
+      </div>
     </ReactModal>
   );
 };

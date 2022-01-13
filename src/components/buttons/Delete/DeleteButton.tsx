@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
+
 import { ConfirmationModal } from '../../modals/Confirmation';
+
 import { deleteNote } from '../../../data-processing/deleteNote';
 import { Note } from '../../../typedefs/Note';
 
@@ -17,6 +21,8 @@ export const DeleteButton: React.FC<Props> = ({
   const [ConfirmationModalRendered, setConfirmationModalRendered] = useState(false);
   const [noteForDeleteId, setNoteForDeleteId] = useState(-1);
 
+  const history = useHistory();
+
   const askForNoteDelete = (noteId: number | null) => {
     if (noteId || noteId === 0) {
       setNoteForDeleteId(noteId);
@@ -32,7 +38,14 @@ export const DeleteButton: React.FC<Props> = ({
         onClick={() => {
           askForNoteDelete(id);
         }}
-        className="Notes__note-delete"
+        className={classNames(
+          'Notes__note-delete',
+          'button',
+          'is-danger',
+          { 'is-light': history.location.pathname !== '/edit' },
+          { 'is-outlined': history.location.pathname !== '/edit' },
+          { 'is-medium': history.location.pathname === '/edit' },
+        )}
       >
         Delete
       </button>
