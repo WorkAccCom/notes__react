@@ -27,50 +27,48 @@ export const App: React.FC = () => {
   };
 
   return (
-    <>
-      <Switch>
-        <Route path="/" exact>
-          <div className="level box section">
-            <h1
-              className={classNames(
-                'title',
-                'is-1',
-                'level-item',
-              )}
-            >
-              Notes
-            </h1>
-            <button
-              type="button"
-              onClick={handleNewNoteButtonClick}
-              className={classNames(
-                'button',
-                'is-success',
-                'is-medium',
-                'level-item',
-              )}
-            >
-              New note
-            </button>
-          </div>
+    <Switch>
+      <Route path="/" exact>
+        <div className="level box section">
+          <h1
+            className={classNames(
+              'title',
+              'is-1',
+              'level-item',
+            )}
+          >
+            Notes
+          </h1>
+          <button
+            type="button"
+            onClick={handleNewNoteButtonClick}
+            className={classNames(
+              'button',
+              'is-success',
+              'is-medium',
+              'level-item',
+            )}
+          >
+            New note
+          </button>
+        </div>
 
-          <Notes
-            notes={notesFromLocalStorage}
-            listReRenderQuery={setNotes}
-            passNoteForEdit={setNoteForEdit}
-          />
-        </Route>
+        <Notes
+          notes={notesFromLocalStorage}
+          listReRenderQuery={setNotes}
+          passNoteForEdit={setNoteForEdit}
+        />
+      </Route>
 
-        <Route path="/edit">
-          <Edit
-            listReRenderQuery={setNotes}
-            chosenNoteForEdit={noteForEdit}
-            cleanUpNoteForEdit={setNoteForEdit}
-          />
-        </Route>
+      <Route path="/edit">
+        <Edit
+          listReRenderQuery={setNotes}
+          chosenNoteForEdit={noteForEdit}
+          cleanUpNoteForEdit={setNoteForEdit}
+        />
+      </Route>
 
-        <p>Error — page is not exist</p>
-      </Switch>
-    </>
+      <p>Error — page is not exist</p>
+    </Switch>
   );
 };

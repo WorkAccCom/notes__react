@@ -61,10 +61,6 @@ export const Edit: React.FC<Props> = ({
     }
   };
 
-  const handleClickOnSaveButton = () => {
-    setOnSaveModalRendered(true);
-  };
-
   const saveNote = () => {
     if (chosenNoteForEdit) {
       editNoteInLocalStorage(
@@ -80,6 +76,14 @@ export const Edit: React.FC<Props> = ({
 
     listReRenderQuery(getNotesFromLocalStorage());
     history.push('/');
+  };
+
+  const handleClickOnSaveButton = () => {
+    if (chosenNoteForEdit) {
+      setOnSaveModalRendered(true);
+    } else {
+      saveNote();
+    }
   };
 
   const handleClickOnCancelButton = () => {
