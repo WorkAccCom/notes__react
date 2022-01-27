@@ -10,6 +10,6 @@
 • Typescript\
 • ClassNames\
 • ReactModal\
-• Boolma
+• Bulma
 
 
