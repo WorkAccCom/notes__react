@@ -81,14 +81,18 @@ export const ConfirmationModal: React.FC<Props> = ({
       onRequestClose={() => {
         changeModalRenderStatus(false);
       }}
+      className="card"
       style={{
+        overlay: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
         content: {
-          top: '100px',
-          left: '380px',
-          right: '380px',
-          bottom: '450px',
+          transform: 'translateY(-100px)',
           border: '2px solid #ccc',
           padding: '30px',
+          margin: '24px',
         },
       }}
     >
